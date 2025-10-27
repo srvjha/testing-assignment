@@ -14,22 +14,29 @@ test('test', async ({ page }) => {
   await page.getByRole('link', { name: ' Cart' }).click();
   await page.getByText('Proceed To Checkout').click();
   await page.getByRole('link', { name: 'Place Order' }).click();
-  await expect(page.locator('#cart_items')).toMatchAriaSnapshot(`
-    - list:
-      - listitem:
-        - link "Home":
-          - /url: /
-      - listitem: Payment
-    - heading "Payment" [level=2]
-    - text: Name on Card
-    - textbox
-    - text: Card Number
-    - textbox
-    - text: CVC
-    - textbox /ex\\. \\d+/
-    - text: Expiration
-    - textbox "MM"
-    - textbox "YYYY"
-    - button "Pay and Confirm Order"
-    `);
+
+// Capture screenshot of payment section
+const paymentSection = page.locator('#cart_items');
+await paymentSection.screenshot({ path: 'screenshots/payment-section.png' });
+
+// Now verify ARIA snapshot
+await expect(paymentSection).toMatchAriaSnapshot(`
+  - list:
+    - listitem:
+      - link "Home":
+        - /url: /
+    - listitem: Payment
+  - heading "Payment" [level=2]
+  - text: Name on Card
+  - textbox
+  - text: Card Number
+  - textbox
+  - text: CVC
+  - textbox /ex\\. \\d+/
+  - text: Expiration
+  - textbox "MM"
+  - textbox "YYYY"
+  - button "Pay and Confirm Order"
+`);
+
 });
