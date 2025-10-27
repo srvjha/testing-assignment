@@ -7,8 +7,8 @@ This project contains automated tests for the AutomationExercise website using P
 
 1. Clone the repository:
 ```bash
-git clone <repository-url>
-cd automation-exercise-test
+git clone "https://github.com/srvjha/testing-assignment"
+cd testing-assignment
 ```
 
 2. Install dependencies:
