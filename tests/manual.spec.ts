@@ -2,7 +2,7 @@ import { test, expect } from '@playwright/test';
 
 test('test', async ({ page }) => {
   await page.goto('https://automationexercise.com/');
-  await page.getByText('Add to cart').nth(1).click();
+  await page.getByText('Add to cart').first().click();
   await page.getByRole('link', { name: 'View Cart' }).click();
   await page.getByText('Proceed To Checkout').click();
   await page.getByRole('link', { name: 'Register / Login' }).click();
